@@ -1,0 +1,100 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreNomorRumahRequest;
+use App\Models\RefNomorRumah;
+use Illuminate\Http\Request;
+
+class NomorRumahController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $rumah = RefNomorRumah::all();
+        return view('nomor-rumah.index', compact('rumah'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('nomor-rumah.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreNomorRumahRequest $request)
+    {
+        RefNomorRumah::create($request->only(['nomor_rumah', 'is_aktif']));
+        return redirect()->route('nomor-rumah.index')->with('success', 'Post created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $rumah = RefNomorRumah::where('nomor_rumah', $id)->firstOrFail();
+        $riwayat = $rumah->riwayatPenghuni()->latest()->get();
+        
+        return view('nomor-rumah.show', compact('rumah', 'riwayat'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nomor_rumah' => 'required|unique:ref_nomor_rumah,nomor_rumah,' . $id . ',nomor_rumah',
+            'is_aktif' => 'required'
+        ]);
+        
+        RefNomorRumah::where('nomor_rumah', $id)->update($request->except(['_token', '_method']));
+        
+        return redirect()->route('nomor-rumah.index')->with('success', 'Data berhasil diupdate');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        RefNomorRumah::where('nomor_rumah', $id)->delete();
+        
+        return redirect()->route('nomor-rumah.index')->with('success', 'Data berhasil dihapus');
+    }
+}
