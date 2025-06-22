@@ -23,7 +23,7 @@ class RiwayatPenghuniController extends Controller
         RiwayatPenghuni::create([
             'nomor_rumah' => $request->nomor_rumah,
             'nama' => $request->nama,
-            'tanggal_masuk' => $request->tanggal_masuk,
+            'tanggal_menetap' => $request->tanggal_masuk,
             'shdk' => $request->shdk
         ]);
         
@@ -35,13 +35,13 @@ class RiwayatPenghuniController extends Controller
         
         $request->validate([
             'nama' => 'required|string|max:255',
-            'tanggal_masuk' => 'nullable|date',
+            'tanggal_menetap' => 'nullable|date',
             'shdk' => 'required'
         ]);
         
         $riwayat->update([
             'nama' => $request->nama,
-            'tanggal_masuk' => $request->tanggal_masuk,
+            'tanggal_menetap' => $request->tanggal_masuk,
             'shdk' => $request->shdk
         ]);
         

@@ -5,19 +5,19 @@
         </h2>
     </x-slot>
     
-    <div class="p-6 bg-white rounded shadow">
+    <div class="p-6 bg-gray-700 rounded shadow">
         <form action="{{route('riwayat-penghuni.store')}}" method="POST" class="space-y-4">
             @csrf
             <input type="hidden" name="nomor_rumah" value="{{request('rumah')}}">
             
             <div>
-                <label for="nama" class="block text-sm font-medium">Nama Penghuni</label>
+                <label for="nama" class="block text-sm text-white font-medium">Nama Penghuni</label>
                 <input type="text" name="nama" id="nama" 
-                    class="w-full border rounded px-3 py-2" required>
+                    class="w-full border rounded px-3 py-2" placeholder="Masukkan Nama" required>
             </div>
             
             <div>
-                <label for="shdk" class="block text-sm font-medium">Status Hubungan Dalam Keluarga(SHDK)</label>
+                <label for="shdk" class="block text-sm text-white font-medium">Status Hubungan Dalam Keluarga(SHDK)</label>
                 <select name="shdk" class="w-full border rounded px-3 py-2">
                     <option>-Pilih Salah Satu-</option>
                     <option value="1">Ayah</option>
@@ -29,7 +29,7 @@
             </div>
             
             <div>
-                <label for="tanggal_masuk" class="block text-sm font-medium">Tanggal Masuk</label>
+                <label for="tanggal_masuk" class="block text-sm text-white font-medium">Tanggal Masuk</label>
                 <input type="date" name="tanggal_masuk" id="tanggal_masuk" 
                     class="w-full border rounded px-3 py-2">
             </div>

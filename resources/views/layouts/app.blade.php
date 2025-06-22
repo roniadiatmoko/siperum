@@ -28,10 +28,10 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="max-w-7xl mx-auto mt-6">
                 @foreach (['success', 'error', 'warning', 'info'] as $msg)
                     @if(session()->has($msg))
-                        <div class="mb-4 px-4 py-2 bg-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-100 border border-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-400 text-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-700 rounded">
+                        <div class="mb-4 px-4 max-w-7xl mx-auto mt-6 py-2 bg-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-700 border border-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-400 text-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-700 rounded">
                             {{ session($msg) }}
                         </div>
                     @endif
