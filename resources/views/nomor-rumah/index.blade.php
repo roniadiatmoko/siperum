@@ -17,6 +17,7 @@
               <tr class="bg-gray-700 text-white">
                 <th class="border px-4 py-2 w-5">Nomor Rumah</th>
                 <th class="border px-4 py-2">Penghuni</th>
+                <th class="border px-4 py-2">Status Menetap</th>
                 <th class="border px-4 py-2">Aksi</th>
               </tr>
             </thead>
@@ -25,6 +26,7 @@
                 <tr>
                   <td class="border px-4 py-2 text-center">{{$item->nomor_rumah}}</td>
                   <td class="border px-4 py-2">{{\App\Models\RiwayatPenghuni::getPenghuni($item->nomor_rumah)}}</td>
+                  <td class="border px-4 py-2">{{$item->is_aktif == 1 ? 'Menetap' : 'Sementara'}}</td>
                   <td class="border px-4 py-2 text-center">
                     <a href="{{route('nomor-rumah.show', $item->nomor_rumah)}}"
                         class="bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-700"    

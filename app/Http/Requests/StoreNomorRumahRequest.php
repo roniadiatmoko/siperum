@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreNomorRumahRequest extends FormRequest
 {
@@ -23,8 +24,15 @@ class StoreNomorRumahRequest extends FormRequest
      */
     public function rules()
     {
+        $isUpdate = $this->route('nomor_rumah');
+        
         return [
-            'nomor_rumah' => 'required|string|unique:ref_nomor_rumah,nomor_rumah',
+            'nomor_rumah' => [
+                'required',
+                'string',
+                Rule::unique('ref_nomor_rumah', 'nomor_rumah')
+                    ->ignore($isUpdate, 'nomor_rumah'), // ini akan aktif hanya saat update
+            ],
             'is_aktif' => 'required|in:0,1'
         ];
     }

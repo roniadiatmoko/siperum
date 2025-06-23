@@ -66,7 +66,9 @@ class NomorRumahController extends Controller
      */
     public function edit($id)
     {
-        //
+        $rumah = RefNomorRumah::findOrFail($id);
+        
+        return view('nomor-rumah.edit', compact('rumah'));
     }
 
     /**
@@ -76,13 +78,8 @@ class NomorRumahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreNomorRumahRequest $request, $id)
     {
-        $request->validate([
-            'nomor_rumah' => 'required|unique:ref_nomor_rumah,nomor_rumah,' . $id . ',nomor_rumah',
-            'is_aktif' => 'required'
-        ]);
-        
         RefNomorRumah::where('nomor_rumah', $id)->update($request->except(['_token', '_method']));
         
         return redirect()->route('nomor-rumah.index')->with('success', 'Data berhasil diupdate');

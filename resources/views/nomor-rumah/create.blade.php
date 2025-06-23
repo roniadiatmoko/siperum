@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold text-white">Tambah Nomor Rumah</h2>
+        <h2 class="text-xl font-semibold text-white"><a href="{{url('/nomor-rumah')}}"><i class="fas fa-arrow-left"></i></a> Tambah Nomor Rumah</h2>
     </x-slot>
 
     <div class="py-4">
@@ -11,7 +11,7 @@
 
                     <div class="mb-4">
                         <label class="block text-sm text-white font-medium">Nomor Rumah</label>
-                        <input type="number" name="nomor_rumah" class="mt-1 block w-full border rounded px-3 py-2"
+                        <input type="text" name="nomor_rumah" class="mt-1 block w-full border rounded px-3 py-2"
                             value="{{ old('nomor_rumah') }}" placeholder="Masukkan nomor rumah" required>
                         @error('nomor_rumah') <p class="text-red-500 text-sm">{{$message}}</p>@enderror
                     </div>
