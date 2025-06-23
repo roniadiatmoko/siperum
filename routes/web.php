@@ -32,12 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('nomor-rumah', NomorRUmahCOntroller::class);
+    Route::resource('riwayat-penghuni', RiwayatPenghuniController::class);
+    Route::post('riwayat-penghuni/{id}/aktif', [RiwayatPenghuniController::class, 'setAktif'])->name('riwayat-penghuni.setAktif');
+    Route::get('riwayat-penghuni/{id}/edit', [RiwayatPenghuniController::class, 'edit'])->name('riwayat-penghuni.edit');
+    Route::put('riwayat-penghuni/{id}', [RiwayatPenghuniController::class, 'update'])->name('riwayat-penghuni.update');
+    Route::patch('riwayat-penghuni/{id}/jadikan-kepala', [RiwayatPenghuniController::class, 'jadikanKepala'])->name('riwayat-penghuni.jadikan-kepala');
 });
-
-Route::resource('nomor-rumah', NomorRumahController::class);
-
-Route::resource('riwayat-penghuni', RiwayatPenghuniController::class);
-Route::post('riwayat-penghuni/{id}/aktif', [RiwayatPenghuniController::class, 'setAktif'])->name('riwayat-penghuni.setAktif');
-
 
 require __DIR__.'/auth.php';

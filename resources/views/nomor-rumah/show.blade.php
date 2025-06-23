@@ -22,6 +22,7 @@
                 <thead>
                     <tr class="bg-gray-900">
                         <th class="border px-4 py-2">Nama</th>
+                        <th class="border px-4 py-2">Status dalam keluarga</th>
                         <th class="border px-4 py-2">Tanggal Menetap</th>
                         <th class="border px-4 py-2">Status</th>
                         <th class="border px-4 py-2">Aksi</th>
@@ -31,15 +32,16 @@
                     @foreach($riwayat as $item)
                     <tr>
                         <td class="border px-4 py-2">{{$item->nama}}</td>
+                        <td class="border px-4 py-2">{{$item->shdk_label}}</td>
                         <td class="border px-4 py-2">{{$item->tanggal_menetap}}</td>
                         <td class="border px-4 py-2 text-center">
                             @if($item->is_aktif)
-                                <span class="text-green-600 font-bold">Aktif</span>
+                                <span class="text-white bg-blue-600 py-2 px-3 rounded font-bold">Kepala Rumah</span>
                             @else
-                                Tidak Aktif
+                                Anggota
                             @endif
                         </td>
-                        <td class="border px-4 py-2 space-x-2">
+                        <td class="border px-4 py-2 space-x-2 text-center">
                             <a href="{{route('riwayat-penghuni.edit', $item->id)}}"
                                 class="bg-blue-600 py-2 px-2 rounded hover:bg-blue-900">
                                 Edit
@@ -51,10 +53,17 @@
                                 </button>
                             </form>
                             @if(!$item->is_aktif)
-                            <form action="{{route('riwayat-penghuni.setAktif', $item->id)}}" method="POST" class="inline">
+                            <form action="{{route('riwayat-penghuni.jadikan-kepala', $item->id)}}" method="POST" class="inline">
                                 @csrf
-                                <button class="bg-green-700 font-semibold py-2 px-2 rounded hover:bg-green-900">Jadikan Kepala Rumah</button>
+                                @method('PATCH')
+                                <button 
+                                    type="submit" 
+                                    class="bg-green-700 font-semibold py-2 px-2 rounded hover:bg-green-900">Jadikan Kepala Rumah</button>
                             </form>
+                            @else
+                            <span class="inline-block bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded">
+                                Kepala Rumah
+                            </span>
                             @endif
                         </td>
                     </tr>

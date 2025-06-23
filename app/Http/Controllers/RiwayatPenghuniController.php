@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRiwayatPenghuniRumah;
 use App\Models\RiwayatPenghuni;
 use Illuminate\Http\Request;
 
@@ -12,14 +13,7 @@ class RiwayatPenghuniController extends Controller
     }
     
     
-    public function store(Request $request){
-        $request->validate([
-            'nomor_rumah' => 'required',
-            'nama' => 'required|string|max:255',
-            'shdk' => 'required',
-            'tanggal_masuk' => 'nullable|date',
-        ]);
-        
+    public function store(StoreRiwayatPenghuniRumah $request){        
         RiwayatPenghuni::create([
             'nomor_rumah' => $request->nomor_rumah,
             'nama' => $request->nama,
@@ -30,14 +24,14 @@ class RiwayatPenghuniController extends Controller
         return redirect()->route('nomor-rumah.show', $request->nomor_rumah)->with('success', 'Penghuni Ditambahkan');
     }
     
-    public function update(Request $request, $id){
+    public function edit($id){
         $riwayat = RiwayatPenghuni::findOrFail($id);
         
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'tanggal_menetap' => 'nullable|date',
-            'shdk' => 'required'
-        ]);
+        return view('riwayat-penghuni.edit', compact('riwayat'));
+    }
+    
+    public function update(StoreRiwayatPenghuniRumah $request, $id){
+        $riwayat = RiwayatPenghuni::findOrFail($id);
         
         $riwayat->update([
             'nama' => $request->nama,
@@ -46,6 +40,17 @@ class RiwayatPenghuniController extends Controller
         ]);
         
         return redirect()->route('nomor-rumah.show', $riwayat->nomor_rumah)->with('success', 'Berhasil diperbarui');
+    }
+    
+    public function jadikanKepala($id){
+        $penghuni = RiwayatPenghuni::findOrFail($id);
+        
+        RiwayatPenghuni::where('nomor_rumah', $penghuni->nomor_rumah)
+                        ->update(['is_aktif' => 0]);
+        
+        $penghuni->update(['is_aktif' => 1]);
+        
+        return redirect()->back()->with('success', 'Penghuni dijadikan kepala rumah');
     }
     
     public function destroy($id){

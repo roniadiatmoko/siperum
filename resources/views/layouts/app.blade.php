@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'SIPERUM') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -31,7 +31,7 @@
             <main class="max-w-7xl mx-auto mt-6">
                 @foreach (['success', 'error', 'warning', 'info'] as $msg)
                     @if(session()->has($msg))
-                        <div class="mb-4 px-4 max-w-7xl mx-auto mt-6 py-2 bg-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-700 border border-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-400 text-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-700 rounded">
+                        <div class="mb-4 px-4 max-w-7xl mx-auto mt-6 py-2 bg-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-700 border border-{{ $msg == 'success' ? 'green' : ($msg == 'error' ? 'red' : 'gray') }}-400 text-{{ $msg == 'success' ? 'white' : ($msg == 'error' ? 'red' : 'gray') }}-700 rounded">
                             {{ session($msg) }}
                         </div>
                     @endif
