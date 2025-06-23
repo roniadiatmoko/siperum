@@ -32,7 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('nomor-rumah', NomorRUmahCOntroller::class);
+    Route::resource('nomor-rumah', NomorRumahCOntroller::class);
+    Route::get('nomor-rumah/{id}', [NomorRumahController::class, 'show'])->name('nomor-rumah.show');
     Route::resource('riwayat-penghuni', RiwayatPenghuniController::class);
     Route::post('riwayat-penghuni/{id}/aktif', [RiwayatPenghuniController::class, 'setAktif'])->name('riwayat-penghuni.setAktif');
     Route::get('riwayat-penghuni/{id}/edit', [RiwayatPenghuniController::class, 'edit'])->name('riwayat-penghuni.edit');

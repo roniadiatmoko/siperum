@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class RiwayatPenghuniController extends Controller
 {
     public function create(Request $request){
-        return view('riwayat-penghuni.create');
+        $rumah = $request->query('rumah');
+        
+        return view('riwayat-penghuni.create', compact('rumah'));
     }
     
     

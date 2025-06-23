@@ -7,7 +7,9 @@
     
     <div class="py-4">
         <div class="max-w-7xl mx-auto p-6  bg-gray-700 text-white rounded shadow">
-            <h3 class="text-lg text-gray-500 font-bold">Status Rumah</h3>
+            <a href="/nomor-rumah" class="text-gray-200 hover:text-gray-400"><i class="fas fa-arrow-left"></i> Kembali</a>    
+        
+            <h3 class="text-lg text-gray-200 font-bold mt-10">Status Rumah</h3>
             
             <p class="mb-4"> {{$rumah->is_aktif ? 'Menetap' : 'Belum Menetap'}}</p>
             

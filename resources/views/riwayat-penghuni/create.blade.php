@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
-            Tambah Penghuni - Rumah {{ request('rumah') }}
+            <a href="{{route('nomor-rumah.show', $rumah)}}"><i class="fas fa-arrow-left"></i></a> Tambah Penghuni - Rumah {{ request('rumah') }}
         </h2>
     </x-slot>
     
