@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ref_nomor_rumah', function (Blueprint $table) {
+        Schema::create('ref_shdk', function (Blueprint $table) {
             $table->id();
+            $table->string('nama', 100);
+            $table->unsignedInteger('urutan')->nullable();
+            $table->boolean('is_aktif')->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ref_nomor_rumahs');
+        Schema::dropIfExists('ref_shdk');
     }
 };

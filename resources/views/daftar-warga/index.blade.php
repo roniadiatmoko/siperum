@@ -1,0 +1,54 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="text-xl text-white font-semibold">
+            Daftar Warga
+        </h2>
+    </x-slot>
+    
+    <div class="py-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg-px-8">
+            <div class="bg-gray-700 overflow-hidden shadown-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <a href="{{route('daftar-warga.create')}}"
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                    >
+                        + Tambah Warga
+                    </a>
+                    
+                    <table id="warga-table" class="table-auto border border-white text-white w-full mt-10">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <td>NIK</td>
+                                <td>Jenis Kelamin</td>
+                                <td>Nomor Ponsel</td>
+                                <td>Aksi</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                
+                @push('scripts')
+                <script>
+                    $(function() {
+                        $('#warga-table').DataTable({
+                            processing: true,
+                            serverSide: true,
+                            ajax: '{{ route("daftar-warga.index") }}',
+                            columns: [
+                                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                                {data: 'nama', name: 'nama'},
+                                {data: 'nik', name: 'nik'},
+                                {data: 'jenis_kelamin', name: 'jenis_kelamin'},
+                                {data: 'no_hp', name: 'no_hp'},
+                                {data: 'action', name:'action', orderAble: false, searchAble: false}
+                            ]
+                        })
+                    })
+                </script>
+                @endpush
+            </div>
+        </div>
+    </div>
+</x-app-layout>
