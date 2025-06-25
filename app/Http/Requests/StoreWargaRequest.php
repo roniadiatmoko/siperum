@@ -2,10 +2,17 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreWargaRequest extends FormRequest
 {
+    
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     dd($validator->errors()->toArray(), $validator->failed());
+    // }
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -37,7 +44,8 @@ class StoreWargaRequest extends FormRequest
             'shdk' => 'required',
             'jenis_kelamin' => 'required',
             'agama' => 'required',
-            'kewarganegaraan' => 'required'
+            'kewarganegaraan' => 'required',
+            'foto_ktp_path' => 'required|image|mimes:jpg,jpeg,png|max:2048', //max 2mb
         ];
     }
     
