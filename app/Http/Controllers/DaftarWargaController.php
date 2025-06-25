@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreWargaRequest;
 use App\Models\RefAgama;
 use App\Models\RefMarital;
 use App\Models\RefPekerjaan;
@@ -65,9 +66,9 @@ class DaftarWargaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreWargaRequest $request)
     {
-        //
+        $request->validate();
     }
 
     /**
