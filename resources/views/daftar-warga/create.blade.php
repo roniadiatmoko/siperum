@@ -20,7 +20,7 @@
                                     <label class="block text-white text-sm">Nama Sesuai KTP</label>
                                     <input type="text" name="nama" id="nama"
                                         placeholder="Masukkan Nama Lengkap"
-                                        class="w-full bg-gray-800 rounded-lg text-white mt-2" 
+                                        class="w-full bg-gray-800 rounded-lg text-white mt-2"
                                         value="{{old('nama')}}"
                                         required />
                                     @error('nama')
@@ -32,7 +32,7 @@
                                     <label class="block text-white text-sm">NIK Sesuai KTP</label>
                                     <input type="number" name="nik" id="nik"
                                         placeholder="Nomor Induk Kependudukan"
-                                        class="w-full bg-gray-800 rounded-lg text-white mt-2" maxlength="16" 
+                                        class="w-full bg-gray-800 rounded-lg text-white mt-2" maxlength="16"
                                         value="{{old('nik')}}"
                                         required />
                                     @error('nik')
@@ -44,7 +44,7 @@
                                     <label class="block text-white text-sm">Nomor KK (Kartu Keluarga)</label>
                                     <input type="number" name="no_kk" id="no_kk"
                                         placeholder="Masukkan Nomor KK"
-                                        class="w-full bg-gray-800 rounded-lg text-white mt-2" 
+                                        class="w-full bg-gray-800 rounded-lg text-white mt-2"
                                         value="{{old('no_kk')}}"
                                         required />
                                     @error('no_kk')
@@ -73,8 +73,7 @@
                                     <input type="text" name="tempat_lahir" id="tempat_lahir"
                                         placeholder="Masukkan Tempat Lahir"
                                         class="w-full bg-gray-800 rounded-lg text-white mt-2"
-                                        value="{{old('tempat_lahir')}}"
-                                        />
+                                        value="{{old('tempat_lahir')}}" />
                                     @error('tempat_lahir')
                                     <div class="bg-red-400 text-red-950 w-full mt-2 rounded-lg py-2 px-2">{{ $message }}</div>
                                     @enderror
@@ -84,9 +83,8 @@
                                     <label class="block text-white text-sm">Tanggal Lahir</label>
                                     <input type="date" name="tanggal_lahir" id="tanggal_lahir"
                                         placeholder="Masukkan Tanggal Lahir"
-                                        class="w-full bg-gray-800 rounded-lg text-white mt-2" 
-                                        value="{{old('tanggal_lahir')}}"
-                                        />
+                                        class="w-full bg-gray-800 rounded-lg text-white mt-2"
+                                        value="{{old('tanggal_lahir')}}" />
                                     @error('tanggal_lahir')
                                     <div class="bg-red-400 text-red-950 w-full mt-2 rounded-lg py-2 px-2">{{ $message }}</div>
                                     @enderror
@@ -137,6 +135,31 @@
                                     <div class="bg-red-400 text-red-950 w-full mt-2 rounded-lg py-2 px-2">{{ $message }}</div>
                                     @enderror
                                 </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-white text-sm mt-7">Status Warga</label>
+                                    <label for="is_aktif" class="inline-flex items-center cursor-pointer">
+                                        <input type="radio"
+                                            id="warga"
+                                            name="is_aktif"
+                                            value="1"
+                                            required
+                                            checked
+                                            class="text-blue-600 focus:ring-blue-500 border-gray-300 mx-2"
+                                            {{ old('is_aktif', $warga->is_aktif ?? '') == '1' ? 'checked' : '' }}>
+                                        <span class="ml-2 text-white">Warga</span>
+                                    </label>
+
+                                    <label for="bukan-warga" class="inline-flex items-center cursor-pointer">
+                                        <input type="radio"
+                                            id="bukan-warga"
+                                            name="is_aktif"
+                                            value="0"
+                                            class="text-pink-600 focus:ring-pink-500 border-gray-300 mx-2"
+                                            {{ old('is_aktif', $warga->is_aktif ?? '') == '0' ? 'checked' : '' }}>
+                                        <span class="ml-2 text-white">Sudah Bukan Warga</span>
+                                    </label>
+                                </div>
                             </div>
 
                             <div class="space-y-6">
@@ -144,7 +167,7 @@
                                     <label class="block text-white text-sm">Daerah Asal Sebelumnya</label>
                                     <input type="text" name="asal_sebelumnya" id="asal_sebelumnya"
                                         placeholder="Masukkan Asal Sebelumnya"
-                                        class="w-full bg-gray-800 rounded-lg text-white mt-2" 
+                                        class="w-full bg-gray-800 rounded-lg text-white mt-2"
                                         value="{{old('asal_sebelumnya')}}"
                                         required />
                                     @error('asal_sebelumnya')
@@ -220,17 +243,17 @@
 
                                 <div class="mb-4">
                                     <label class="block text-white text-sm">Pendidikan Terakhir</label>
-                                    <select name="pendidikan_terakhir" id="agama" class="w-full border rounded px-3 py-2 mt-2 bg-gray-800 text-white">
+                                    <select name="pendidikan_terakhir" id="pendidikan_terakhir" class="w-full border rounded px-3 py-2 mt-2 bg-gray-800 text-white">
                                         <option value="" disabled hidden selected>Pilih Status</option>
                                         @foreach($pendidikanList as $key => $pend)
                                         <option value="{{$key}}"
-                                            {{old('pendidikan', $warga->pendidikan ?? '') == $key ? 'selected' : ''}}>
+                                            {{old('pendidikan_terakhir', $warga->pendidikan_terakhir ?? '') == $key ? 'selected' : ''}}>
                                             {{$pend}}
                                         </option>
                                         @endforeach
                                     </select>
 
-                                    @error('pendidikan')
+                                    @error('pendidikan_terakhir')
                                     <div class="bg-red-400 text-red-950 w-full mt-2 rounded-lg py-2 px-2">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -240,8 +263,7 @@
                                     <input type="email" name="email" id="email"
                                         placeholder="Masukkan email Lengkap"
                                         class="w-full bg-gray-800 rounded-lg text-white mt-2"
-                                        value="{{old('email')}}"
-                                        />
+                                        value="{{old('email')}}" />
                                     @error('email')
                                     <div class="bg-red-400 text-red-950 w-full mt-2 rounded-lg py-2 px-2">{{ $message }}</div>
                                     @enderror
@@ -251,9 +273,8 @@
                                     <label class="block text-white text-sm">Nomor Whatsapp Aktif</label>
                                     <input type="text" name="no_hp" id="no_hp"
                                         placeholder="Masukkan Nomor Whatsapp Aktif"
-                                        class="w-full bg-gray-800 rounded-lg text-white mt-2" 
-                                        value="{{old('no_hp')}}"
-                                        />
+                                        class="w-full bg-gray-800 rounded-lg text-white mt-2"
+                                        value="{{old('no_hp')}}" />
                                     @error('no_hp')
                                     <div class="bg-red-400 text-red-950 w-full mt-2 rounded-lg py-2 px-2">{{ $message }}</div>
                                     @enderror
@@ -263,8 +284,7 @@
                                     <label class="block text-white text-sm">Foto KTP</label>
                                     <input type="file" name="foto_ktp_path" id="foto_ktp_path"
                                         placeholder="Masukkan Nomor Whatsapp Aktif"
-                                        class="w-full bg-gray-800 rounded-lg text-white mt-2" 
-                                        />
+                                        class="w-full bg-gray-800 rounded-lg text-white mt-2" />
                                     @error('foto_ktp_path')
                                     <div class="bg-red-400 text-red-950 w-full mt-2 rounded-lg py-2 px-2">{{ $message }}</div>
                                     @enderror

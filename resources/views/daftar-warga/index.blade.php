@@ -14,13 +14,12 @@
                     >
                         + Tambah Warga
                     </a>
-                    
-                    <table id="warga-table" class="table-auto border border-white text-white w-full mt-10">
+                    <br/><br/><br/>
+                    <table id="warga-table" class="table-auto border border-white text-white w-full">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <td>NIK</td>
                                 <td>Jenis Kelamin</td>
                                 <td>Nomor Ponsel</td>
                                 <td>Aksi</td>
@@ -37,9 +36,8 @@
                             serverSide: true,
                             ajax: '{{ route("daftar-warga.index") }}',
                             columns: [
-                                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                                 {data: 'nama', name: 'nama'},
-                                {data: 'nik', name: 'nik'},
                                 {data: 'jenis_kelamin', name: 'jenis_kelamin'},
                                 {data: 'no_hp', name: 'no_hp'},
                                 {data: 'action', name:'action', orderAble: false, searchAble: false}

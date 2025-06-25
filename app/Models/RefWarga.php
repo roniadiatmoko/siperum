@@ -31,4 +31,26 @@ class RefWarga extends Model
         'alamat',
         'is_aktif'
     ];
+    
+    public function shdk()
+    {
+        return $this->belongsTo(RefShdk::class, 'status_hubungan_keluarga', 'id');
+    }
+    
+    public function refAgama()
+    {
+        return $this->belongsTo(RefAgama::class, 'agama', 'id');
+    }
+    
+    public function statusMarital(){
+        return $this->belongsTo(RefMarital::class, 'status_marital', 'id');
+    }
+    
+    public function pendidikanTerakhir(){
+        return $this->belongsTo(RefPendidikan::class, 'pendidikan_terakhir', 'id');
+    }
+    
+    public function refPekerjaan(){
+        return $this->belongsTo(RefPekerjaan::class, 'pekerjaan', 'id');
+    }
 }

@@ -23,7 +23,29 @@ class DaftarWargaController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()){
-            return DataTables::of(RefWarga::query())->make(true);
+            $query = RefWarga::select([
+                            'id','nama','jenis_kelamin','no_hp','is_aktif'
+                        ])
+                        ->orderByDesc('is_aktif')
+                        ->orderBy('nama', 'asc');
+                        
+            return DataTables::eloquent($query)
+                        ->addIndexColumn()
+                        ->addColumn('action', function ($row){
+                            $urlDetail = route('daftar-warga.show', ['daftar_warga' => $row->id]);
+                            $urlUpdate = route('daftar-warga.edit', ['daftar_warga' => $row->id]);
+                            $urlDelete = route('daftar-warga.destroy', ['daftar_warga' => $row->id]);
+                            
+                            return '
+                                <div class="flex flex-row">
+                                    <a href="' . $urlDetail . '" class="text-white bg-blue-600 py-2 px-2 rounded mx-2 hover:bg-blue-800">Detail</a>
+                                    <a href="' . $urlUpdate . '" class="text-white bg-orange-600 py-2 px-2 rounded mx-2 hover:bg-orange-800">Perbarui</a>
+                                    <a href="' . $urlDelete . '" class="text-white bg-red-600 py-2 px-2 rounded mx-2 hover:bg-red-800">Hapus</a>
+                                </div>
+                            ';
+                        })
+                        ->rawColumns(['action'])
+                        ->make(true);
         }
         
         return view('daftar-warga.index');
@@ -82,7 +104,7 @@ class DaftarWargaController extends Controller
         
         $warga = RefWarga::create($data);
         
-        return redirect()->route('daftar-warga.show', $warga)
+        return redirect()->route('daftar-warga.show', $warga->id)
                         ->with('success', 'Data warga berhasil simpan');
     }
 
@@ -92,9 +114,9 @@ class DaftarWargaController extends Controller
      * @param  \App\Models\RefWarga  $refWarga
      * @return \Illuminate\Http\Response
      */
-    public function show(RefWarga $refWarga)
+    public function show($id)
     {
-        $warga = RefWarga::where('id', $refWarga->id);
+        $warga = RefWarga::where('id', $id)->firstOrFail();
         
         return view('daftar-warga.view', compact('warga'));
     }
