@@ -8,10 +8,10 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreWargaRequest extends FormRequest
 {
     
-    // protected function failedValidation(Validator $validator)
-    // {
-    //     dd($validator->errors()->toArray(), $validator->failed());
-    // }
+    protected function failedValidation(Validator $validator)
+    {
+        dd($validator->errors()->toArray(), $validator->failed());
+    }
     
     /**
      * Determine if the user is authorized to make this request.

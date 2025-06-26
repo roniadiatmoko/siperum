@@ -63,10 +63,12 @@
                             <small class="text-gray-200">Nomor Whatsapp</small><br />
                             <p class="font-semibold text-blue-400 text-lg">{{$warga->no_hp}}</p>
                         </div>
-
+            
                     </div>
 
-
+                    <div class="flex justify-center mt-10">
+                        <a class="bg-orange-600 hover:bg-orange-800 text-white rounded py-2 px-2" href="{{route('daftar-warga.edit', $warga->id)}}"><i class="fas fa-pencil"></i> Perbarui</a>
+                    </div>
 
                 </div>
             </div>

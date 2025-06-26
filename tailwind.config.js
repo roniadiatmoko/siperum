@@ -7,6 +7,12 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
+    
+    safelist: [
+        'bg-orange-600',
+        'hover:bg-orange-800',
+        'text-white'
+    ],
 
     theme: {
         extend: {
