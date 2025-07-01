@@ -10,6 +10,9 @@ use App\Models\RefPendidikan;
 use App\Models\RefShdk;
 use App\Models\RefWarga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -43,7 +46,11 @@ class DaftarWargaController extends Controller
                                 <div class="flex flex-row justify-center">
                                     <a href="' . $urlDetail . '" class="text-white bg-blue-600 py-2 px-2 rounded mx-2 hover:bg-blue-800"><i class="fas fa-eye"></i> Detail</a>
                                     <a href="' . $urlUpdate . '" class="text-white bg-orange-600 py-2 px-2 rounded mx-2 hover:bg-orange-800"><i class="fas fa-pencil"></i> Perbarui</a>
-                                    <a href="' . $urlDelete . '" class="text-white bg-red-600 py-2 px-2 rounded mx-2 hover:bg-red-800"><i class="fas fa-trash"></i> Hapus</a>
+                                    <form action="' . $urlDelete . '" method="POST" class="inline-block mx-2" 
+                                        onsubmit="return confirm(\'Anda akan menghapus data ini\')"
+                                    >'.csrf_field().method_field('DELETE').'
+                                        <button type="submit" class="text-white bg-red-600 py-2 px-2 rounded mx-2 hover:bg-red-800"><i class="fas fa-trash"></i> Hapus</button>
+                                    </form>
                                 </div>
                             ';
                         })
@@ -99,7 +106,7 @@ class DaftarWargaController extends Controller
         
         if($request->hasFile('foto_ktp_path')){
             $file = $request->file('foto_ktp_path');
-            $filename = $request->nik . '_' . $file->getClientOriginalExtension();
+            $filename = $request->nik . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/foto_warga', $filename);
             $data['foto_ktp_path'] = $filename;
         }
@@ -189,8 +196,31 @@ class DaftarWargaController extends Controller
      * @param  \App\Models\RefWarga  $refWarga
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RefWarga $refWarga)
+    public function destroy($id)
     {
-        //
+        $dataWarga = RefWarga::findOrFail($id);
+        
+        $foto = $dataWarga->foto_ktp_path;
+        
+        try {
+            DB::transaction(function() use ($dataWarga, $foto){
+                $dataWarga->delete();
+                
+                DB::afterCommit(function() use ($foto){
+                    if ($foto && Storage::exists($foto)) {
+                        if(!Storage::delete($foto)){
+                            throw new \RuntimeException('Gagal menghapus file');
+                        }
+                    }
+                });
+            }, 3);
+            
+            return back()->with('success', 'Data dan foto berhasil dihapus');
+        } catch (\Throwable $e) {
+            Log::error('Gagal hapus warga:' . $e->getMessage());
+            return back()->with('error', 'Gagal menghapus data: ', $e->getMessage());
+        }
+        
+        echo $data->foto_ktp_path;exit;
     }
 }
