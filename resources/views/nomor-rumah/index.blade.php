@@ -31,7 +31,7 @@
                     <a href="{{route('nomor-rumah.show', $item->nomor_rumah)}}"
                         class="bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-700"    
                     >
-                        Lihat
+                        Lihat Penghuni
                     </a>
                     &nbsp;
                     <a href="{{route('nomor-rumah.edit', $item->nomor_rumah)}}" 

@@ -136,7 +136,12 @@ class DaftarWargaController extends Controller
      */
     public function show($id)
     {
-        $warga = RefWarga::where('id', $id)->firstOrFail();
+        $warga = RefWarga::query()
+                ->from('ref_warga as w')
+                ->select('w.*', 'p.nomor_rumah')
+                ->leftJoin('riwayat_penghuni as p', 'p.id_warga', '=', 'w.id')
+                ->where('w.id', $id)
+                ->firstOrFail();
         
         return view('daftar-warga.view', compact('warga'));
     }

@@ -12,11 +12,25 @@
                     <h2 class="font-bold text-center text-2xl">Detail</h2>
                     <br />
 
-                    <div class="text-center justify-center mb-5">
-                        <img src="{{asset('storage/foto_warga/' . $warga->foto_ktp_path)}}" alt="photo-{{$warga->nama}}" class="w-64 mx-auto"/>
+                    <div class="text-center justify-center">
+                        <img src="{{$warga->foto_ktp_path ? asset('storage/foto_warga/' . $warga->foto_ktp_path) : asset('storage/images/default-photo.jpg')}}" alt="photo-{{$warga->nama}}" class="w-64 mx-auto"/>
+                        @if(!$warga->foto_ktp_path)
+                            <p class="text-red-400 text-sm">*Foto belum diisi</p>
+                        @endif
+                        
                         <small class="text-gray-200">Status Warga</small><br />
                         <p class="font-semibold {{$warga->is_aktif == 1 ? 'text-blue-400' : 'text-red-400' }} text-lg">{{$warga->is_aktif == 1 ? 'Warga Perumahan' : 'Sudah Bukan Warga Perumahan'}}</p>
                     </div>
+                    
+                    @if($warga->is_aktif)
+                    <div class="text-center justify-center mb-5">
+                        <small class="text-gray-200">Nomor Rumah</small>
+                        <p class="font-semibold {{$warga->nomor_rumah ? 'text-blue-400' : 'text-red-400' }} text-lg">{{$warga->nomor_rumah ?? 'Belum diatur'}}</p>
+                        @if(!$warga->nomor_rumah)
+                            <a href="{{route('nomor-rumah.index')}}" class="text-white bg-orange-600 py-2 px-2 rounded text-xs hover:bg-orange-800"><i class="fas fa-pencil"></i> Atur sekarang</a>
+                        @endif
+                    </div>
+                    @endif
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
@@ -58,10 +72,10 @@
                             <p class="font-semibold text-blue-400 text-lg">{{$warga->refPekerjaan->nama}}</p>
 
                             <small class="text-gray-200">Email</small><br />
-                            <p class="font-semibold text-blue-400 text-lg">{{$warga->email}}</p>
+                            <p class="font-semibold text-blue-400 text-lg">{!! $warga->email ?? '<span class="!text-red-400">(Belum Diisi)</span>' !!}</p>
 
                             <small class="text-gray-200">Nomor Whatsapp</small><br />
-                            <p class="font-semibold text-blue-400 text-lg">{{$warga->no_hp}}</p>
+                            <p class="font-semibold text-blue-400 text-lg">{!! $warga->no_hp ?? '<span class="!text-red-400">(Belum Diisi)</span>' !!}</p>
                         </div>
             
                     </div>
