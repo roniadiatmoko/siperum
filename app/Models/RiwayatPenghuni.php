@@ -9,10 +9,14 @@ class RiwayatPenghuni extends Model
 {
     use HasFactory;
     protected $table = 'riwayat_penghuni';
-    protected $fillable = ['nomor_rumah', 'nama', 'is_aktif', 'tanggal_menetap', 'shdk'];
+    protected $fillable = ['nomor_rumah', 'id_warga', 'is_aktif', 'tanggal_menetap', 'shdk'];
     
     public function rumah(){
         return $this->belongsTo(RefNomorRumah::class, 'nomor_rumah', 'nomor_rumah');
+    }
+    
+    public function warga(){
+        return $this->belongsTo(RefWarga::class, 'id_warga', 'id');
     }
     
     public function getShdkLabelAttribute(){

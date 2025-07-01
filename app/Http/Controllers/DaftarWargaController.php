@@ -26,11 +26,16 @@ class DaftarWargaController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()){
-            $query = RefWarga::select([
-                            'id','nama','jenis_kelamin','no_hp','is_aktif'
+            $query = RefWarga::query()
+                        ->from('ref_warga as w')
+                        ->select([
+                            'w.id','w.nama','w.jenis_kelamin','w.no_hp','w.is_aktif','p.nomor_rumah'
                         ])
+                        ->leftJoin('riwayat_penghuni as p', 'p.id_warga', '=', 'w.id')
+                        ->leftJoin('ref_shdk as s', 's.id', '=', 'w.status_hubungan_keluarga')
                         ->orderByDesc('is_aktif')
-                        ->orderBy('nama', 'asc');
+                        ->orderBy('w.nama', 'asc')
+                        ->orderBy('p.nomor_rumah', 'asc');
                         
             return DataTables::eloquent($query)
                         ->addIndexColumn()
@@ -39,6 +44,9 @@ class DaftarWargaController extends Controller
                         })
                         ->editColumn('is_aktif', function($row){
                             return $row->is_aktif ? '<span class="text-green-600">Warga Aktif</span>' : '<span class="text-red-400">Sudah bukan Warga</span>';
+                        })
+                        ->editColumn('nomor_rumah', function($row){
+                            return $row->nomor_rumah ?? '<i class="text-red-400">(Belum diatur)</i>';
                         })
                         ->addColumn('action', function ($row){
                             $urlDetail = route('daftar-warga.show', ['daftar_warga' => $row->id]);
@@ -57,7 +65,7 @@ class DaftarWargaController extends Controller
                                 </div>
                             ';
                         })
-                        ->rawColumns(['action', 'is_aktif'])
+                        ->rawColumns(['action', 'is_aktif', 'nomor_rumah'])
                         ->make(true);
         }
         

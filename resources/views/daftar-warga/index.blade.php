@@ -42,7 +42,7 @@
                                 {data: 'nama', name: 'nama'},
                                 {data: 'jenis_kelamin', name: 'jenis_kelamin'},
                                 {data: 'no_hp', name: 'no_hp'},
-                                {data: 'nomor_rumah', name: 'nomor_rumah'},
+                                {data: 'nomor_rumah', name: 'nomor_rumah', className: 'text-center'},
                                 {data: 'is_aktif', name: 'is_aktif'},
                                 {data: 'action', name:'action', orderAble: false, searchAble: false}
                             ]
