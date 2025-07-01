@@ -22,6 +22,8 @@
                                 <th class="!text-center">Nama</th>
                                 <th class="!text-center">Jenis Kelamin</th>
                                 <th class="!text-center">Nomor Ponsel</th>
+                                <th class="!text-center">Nomor Rumah</th>
+                                <th class="!text-center">Status</th>
                                 <th class="!text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -40,6 +42,8 @@
                                 {data: 'nama', name: 'nama'},
                                 {data: 'jenis_kelamin', name: 'jenis_kelamin'},
                                 {data: 'no_hp', name: 'no_hp'},
+                                {data: 'nomor_rumah', name: 'nomor_rumah'},
+                                {data: 'is_aktif', name: 'is_aktif'},
                                 {data: 'action', name:'action', orderAble: false, searchAble: false}
                             ]
                         })

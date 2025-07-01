@@ -37,6 +37,9 @@ class DaftarWargaController extends Controller
                         ->editColumn('jenis_kelamin', function ($row){
                             return $row->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
                         })
+                        ->editColumn('is_aktif', function($row){
+                            return $row->is_aktif ? '<span class="text-green-600">Warga Aktif</span>' : '<span class="text-red-400">Sudah bukan Warga</span>';
+                        })
                         ->addColumn('action', function ($row){
                             $urlDetail = route('daftar-warga.show', ['daftar_warga' => $row->id]);
                             $urlUpdate = route('daftar-warga.edit', ['daftar_warga' => $row->id]);
@@ -54,7 +57,7 @@ class DaftarWargaController extends Controller
                                 </div>
                             ';
                         })
-                        ->rawColumns(['action'])
+                        ->rawColumns(['action', 'is_aktif'])
                         ->make(true);
         }
         
