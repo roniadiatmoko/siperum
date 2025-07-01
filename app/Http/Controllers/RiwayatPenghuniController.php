@@ -43,7 +43,7 @@ class RiwayatPenghuniController extends Controller
         
         $riwayat->update([
             'id_warga' => $request->id_warga,
-            'nomor_rumah' => $request->nomor_rumah,
+            // 'nomor_rumah' => $request->nomor_rumah,
             'tanggal_menetap' => $request->tanggal_masuk,
         ]);
         

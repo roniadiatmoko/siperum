@@ -23,7 +23,9 @@
 
     <div>
         <label for="tanggal_masuk" class="block text-sm text-white font-medium">Tanggal Menetap (Kosongi jika belum menetap)</label>
+        
         <input type="date" name="tanggal_masuk" id="tanggal_masuk"
+            value="{{old('tanggal_masuk', $warga ? $warga->tanggal_menetap : '')}}"
             class="w-full border rounded px-3 py-2">
         @error('tanggal_masuk')
         <p class="text-red-500 text-sm mt-1">{{$message}}</p>

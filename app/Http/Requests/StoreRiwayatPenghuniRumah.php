@@ -22,7 +22,7 @@ class StoreRiwayatPenghuniRumah extends FormRequest
         return [
             'id_warga'        => 'required',
             'tanggal_menetap' => 'nullable|date',
-            'nomor_rumah'     => 'required|string',
+            // 'nomor_rumah'     => 'required|string',
         ];
     }
     
@@ -30,7 +30,7 @@ class StoreRiwayatPenghuniRumah extends FormRequest
     {
         return [
             'id_warga.required'        => 'Nama Warga wajib diisi',
-            'nomor_rumah.required'     => 'Nomor Rumah wajib diisi'
+            // 'nomor_rumah.required'     => 'Nomor Rumah wajib diisi'
         ];
     }
 }
