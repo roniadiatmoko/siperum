@@ -19,14 +19,11 @@ class RiwayatPenghuni extends Model
         return $this->belongsTo(RefWarga::class, 'id_warga', 'id');
     }
     
-    public function getShdkLabelAttribute(){
-        return self::shdkOptions($this->shdk) ?? '-';
-    }
-    
     public static function getPenghuni($nomorRumah)
     {
         $penghuni = self::where('nomor_rumah', $nomorRumah)
-                    ->orderBy('shdk')
+                    ->with('warga')
+                    ->orderBy('nomor_rumah')
                     ->get();
         
         //jika tidak ada penghuni, return null atau tanda strip
@@ -45,8 +42,8 @@ class RiwayatPenghuni extends Model
         //Hitung total penghuni lain selain kepala
         $totalLainnya = $penghuni->count()-1;
         
-        //format label
-        $label = $kepala->nama;
+        //format label nama
+        $label = $kepala->warga->nama;
         
         if($totalLainnya > 0){
             $label .= " (+$totalLainnya lainnya)";
