@@ -4,14 +4,15 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreWargaRequest extends FormRequest
 {
     
-    protected function failedValidation(Validator $validator)
-    {
-        dd($validator->errors()->toArray(), $validator->failed());
-    }
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     dd($validator->errors()->toArray(), $validator->failed());
+    // }
     
     /**
      * Determine if the user is authorized to make this request.
@@ -35,17 +36,18 @@ class StoreWargaRequest extends FormRequest
                 'required',
                 'digits: 16',
                 'regex:/^(?!([0-9])\1{15})[0-9]{16}$/',
-                'unique:ref_warga,nik'
+                Rule::unique('ref_warga', 'nik')
+                    ->ignore($this->route('daftar_warga')),
             ],
             'no_kk' => 'required|digits:16',
             'nama' => [
                 'required'
             ],
-            'shdk' => 'required',
+            'status_hubungan_keluarga' => 'required',
             'jenis_kelamin' => 'required',
             'agama' => 'required',
             'kewarganegaraan' => 'required',
-            'foto_ktp_path' => 'required|image|mimes:jpg,jpeg,png|max:2048', //max 2mb
+            'foto_ktp_path' => 'image|mimes:jpg,jpeg,png|max:2048', //max 2mb
         ];
     }
     
@@ -59,7 +61,7 @@ class StoreWargaRequest extends FormRequest
             
             'nama.required' => 'Nama wajib diisi',
             
-            'shdk.required' => 'Status Dalam Keluarga harus diisi',
+            'status_hubungan_keluarga.required' => 'Status Dalam Keluarga harus diisi',
             'no_kk.required' => 'Nomor KK wajib diisi',
             'no_kk.digits'   => 'Nomor KK harus 16 digit angka',
             

@@ -169,7 +169,7 @@ class DaftarWargaController extends Controller
     public function update(StoreWargaRequest $request, $id)
     {
         $data = $request->validated();
-        $data += $request->except('foto_ktp_path');
+        $data += $request->except('foto_ktp_path', '_token', '_method');
         
         if($request->hasFile('foto_ktp_path')){
             $file = $request->file('foto_ktp_path');
@@ -180,7 +180,7 @@ class DaftarWargaController extends Controller
         
         RefWarga::where('id', $id)->update($data);
         
-        return redirect()->route('daftar-warga.view', $id)->with('success', 'Berhasil diperbarui');
+        return redirect()->route('daftar-warga.show', $id)->with('success', 'Berhasil diperbarui');
     }
 
     /**

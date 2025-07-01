@@ -2,7 +2,7 @@
     @csrf
     
     @isset($warga)
-        @method('PATCH')    
+        @method('PUT')    
     @endisset
 
     <div class="text-center text-white mb-4">Isi form berikut</div>
@@ -274,7 +274,7 @@
             </div>
 
             <div class="mb-4">
-                <label class="block text-white text-sm">Foto KTP</label>
+                <label class="block text-white text-sm">Foto (Wajah atau KTP)</label>
                 @isset($warga)
                 <div class="justify-center">
                     <img src="{{asset('storage/foto_warga/' . $warga->foto_ktp_path)}}" alt="Photo {{$warga->nama}}" class="w-32 mx-auto" />

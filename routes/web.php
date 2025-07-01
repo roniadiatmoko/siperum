@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     
     //daftar warga
     Route::resource('daftar-warga', DaftarWargaController::class);
+    // Route::put('daftar-warga/{id}', [DaftarWargaController::class, 'update'])->name('daftar-warga.update');
     
 });
 

@@ -17,7 +17,7 @@
                         'pekerjaanList' => $pekerjaanList,
                         'pendidikanList' => $pendidikanList,
                         'action' => route('daftar-warga.update', $warga),
-                        'method' => 'PATCH'
+                        'method' => 'POST'
                     ])
                 </div>
             </div>

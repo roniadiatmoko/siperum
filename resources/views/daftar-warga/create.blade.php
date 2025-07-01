@@ -16,7 +16,7 @@
                         'maritalList' => $maritalList,
                         'pekerjaanList' => $pekerjaanList,
                         'pendidikanList' => $pendidikanList,
-                        'action' => route('daftar-warga.create'),
+                        'action' => route('daftar-warga.store'),
                         'method' => 'POST'
                     ])
                 </div>
