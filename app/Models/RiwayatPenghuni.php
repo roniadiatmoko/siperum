@@ -9,7 +9,7 @@ class RiwayatPenghuni extends Model
 {
     use HasFactory;
     protected $table = 'riwayat_penghuni';
-    protected $fillable = ['nomor_rumah', 'id_warga', 'is_aktif', 'tanggal_menetap', 'shdk'];
+    protected $fillable = ['nomor_rumah', 'id_warga', 'is_aktif', 'tanggal_menetap'];
     
     public function rumah(){
         return $this->belongsTo(RefNomorRumah::class, 'nomor_rumah', 'nomor_rumah');
@@ -21,18 +21,6 @@ class RiwayatPenghuni extends Model
     
     public function getShdkLabelAttribute(){
         return self::shdkOptions($this->shdk) ?? '-';
-    }
-    
-    //get shdk params id:string
-    public static function shdkOptions($id): string
-    {
-        return [
-            1 => 'Ayah',
-            2 => 'Ibu',
-            3 => 'Anak',
-            4 => 'Cucu',
-            5 => 'Lainnya'
-        ][$id];
     }
     
     public static function getPenghuni($nomorRumah)

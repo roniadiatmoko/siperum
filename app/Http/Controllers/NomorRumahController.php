@@ -51,8 +51,8 @@ class NomorRumahController extends Controller
     {
         $rumah = RefNomorRumah::where('nomor_rumah', $id)->firstOrFail();
         $riwayat = $rumah->riwayatPenghuni()
+                    ->with('warga')
                     ->orderByDesc('is_aktif')
-                    ->orderBy('shdk')
                     ->get();
         
         return view('nomor-rumah.show', compact('rumah', 'riwayat'));

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRiwayatPenghuniRumah;
+use App\Models\RefWarga;
 use App\Models\RiwayatPenghuni;
 use Illuminate\Http\Request;
 
@@ -10,17 +11,21 @@ class RiwayatPenghuniController extends Controller
 {
     public function create(Request $request){
         $rumah = $request->query('rumah');
+        $wargaList = $this->listWarga();
         
-        return view('riwayat-penghuni.create', compact('rumah'));
+        return view('riwayat-penghuni.create', compact('rumah', 'wargaList'));
+    }
+    
+    public function listWarga(){
+        return RefWarga::pluck('nama', 'id');
     }
     
     
     public function store(StoreRiwayatPenghuniRumah $request){        
         RiwayatPenghuni::create([
+            'id_warga' => $request->id_warga,
             'nomor_rumah' => $request->nomor_rumah,
-            'nama' => $request->nama,
             'tanggal_menetap' => $request->tanggal_masuk,
-            'shdk' => $request->shdk
         ]);
         
         return redirect()->route('nomor-rumah.show', $request->nomor_rumah)->with('success', 'Penghuni Ditambahkan');
@@ -28,17 +33,18 @@ class RiwayatPenghuniController extends Controller
     
     public function edit($id){
         $riwayat = RiwayatPenghuni::findOrFail($id);
+        $wargaList = $this->listWarga();
         
-        return view('riwayat-penghuni.edit', compact('riwayat'));
+        return view('riwayat-penghuni.edit', compact('riwayat', 'wargaList'));
     }
     
     public function update(StoreRiwayatPenghuniRumah $request, $id){
         $riwayat = RiwayatPenghuni::findOrFail($id);
         
         $riwayat->update([
-            'nama' => $request->nama,
+            'id_warga' => $request->id_warga,
+            'nomor_rumah' => $request->nomor_rumah,
             'tanggal_menetap' => $request->tanggal_masuk,
-            'shdk' => $request->shdk
         ]);
         
         return redirect()->route('nomor-rumah.show', $riwayat->nomor_rumah)->with('success', 'Berhasil diperbarui');

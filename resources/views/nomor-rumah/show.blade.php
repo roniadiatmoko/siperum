@@ -11,7 +11,7 @@
         
             <h3 class="text-lg text-gray-200 font-bold mt-10">Status Rumah</h3>
             
-            <p class="mb-4"> {{$rumah->is_aktif ? 'Menetap' : 'Belum Menetap'}}</p>
+            <p class="mb-4"> {{$rumah->tanggal_menetap ? 'Menetap' : 'Belum Menetap'}}</p>
             
             <h3 class="text-lg text-center font-bold mb-2">Riwayat Penghuni</h3>
             
@@ -33,9 +33,9 @@
                 <tbody>
                     @foreach($riwayat as $item)
                     <tr>
-                        <td class="border px-4 py-2">{{$item->nama}}</td>
-                        <td class="border px-4 py-2">{{$item->shdk_label}}</td>
-                        <td class="border px-4 py-2">{{$item->tanggal_menetap}}</td>
+                        <td class="border px-4 py-2">{{$item->warga->nama}}</td>
+                        <td class="border px-4 py-2">{{$item->warga->shdk->nama}}</td>
+                        <td class="border px-4 py-2 text-center">{{$item->tanggal_menetap ?? '-'}}</td>
                         <td class="border px-4 py-2 text-center">
                             @if($item->is_aktif)
                                 <span class="text-white bg-blue-600 py-2 px-3 rounded font-bold">Kepala Rumah</span>

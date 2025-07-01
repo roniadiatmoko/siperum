@@ -2,10 +2,16 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRiwayatPenghuniRumah extends FormRequest
 {
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     dd($validator->errors()->toArray(), $validator->failed());
+    // }
+    
     public function authorize()
     {
         return true;
@@ -14,17 +20,17 @@ class StoreRiwayatPenghuniRumah extends FormRequest
     public function rules()
     {
         return [
-            'nama'        => 'required|string',
+            'id_warga'        => 'required',
             'tanggal_menetap' => 'nullable|date',
-            'shdk'            => 'required|string',
+            'nomor_rumah'     => 'required|string',
         ];
     }
     
     public function messages(): array
     {
         return [
-            'nama.required'        => 'Nama wajib diisi',
-            'shdk.required'        => 'Hubungan dalam keluarga wajib diisi'
+            'id_warga.required'        => 'Nama Warga wajib diisi',
+            'nomor_rumah.required'     => 'Nomor Rumah wajib diisi'
         ];
     }
 }

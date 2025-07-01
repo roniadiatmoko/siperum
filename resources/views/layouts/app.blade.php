@@ -17,6 +17,10 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
+        <!-- select2 -->
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"> 
+         <script src="https://cdn.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js"></script> 
+         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
