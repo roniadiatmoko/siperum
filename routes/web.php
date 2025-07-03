@@ -3,6 +3,7 @@
 use App\Http\Controllers\DaftarWargaController;
 use App\Http\Controllers\NomorRumahController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RefPerumahanController;
 use App\Http\Controllers\RiwayatPenghuniController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,7 +49,8 @@ Route::middleware('auth')->group(function () {
     
     //daftar warga
     Route::resource('daftar-warga', DaftarWargaController::class);
-    // Route::put('daftar-warga/{id}', [DaftarWargaController::class, 'update'])->name('daftar-warga.update');
+    
+    Route::resource('daftar-perumahan', RefPerumahanController::class);
     
 });
 
