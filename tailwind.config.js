@@ -1,17 +1,13 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
-    ],
-    
-    safelist: [
-        'bg-orange-600',
-        'hover:bg-orange-800',
-        'text-white'
+        './resources/js/**/*.jsx',
     ],
 
     theme: {
@@ -22,5 +18,5 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [forms],
 };
